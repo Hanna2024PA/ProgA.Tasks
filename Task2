@@ -1,0 +1,25 @@
+package org.example;
+
+import  java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        var scanner = new Scanner(System.in);
+        System.out.println("What is the car speed km/h?");
+        var hours = scanner.nextDouble();
+
+        while (true){
+
+        System.out.println("How many hours is the car going?");
+        var speed = scanner.nextDouble();
+
+        if (speed == 0)
+        break;
+
+        var result = speed * hours;
+        System.out.println("What distance has the car gone? = " + result);
+        }
+
+    }
+}
