@@ -1,0 +1,58 @@
+package org.example;
+
+import net.thauvin.erik.crypto.CryptoPrice;
+import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+
+public class MyBot extends TelegramLongPollingBot {
+    public MyBot() {
+        super("6511563453:AAHDLLM6hSnFx6LTQotgsQCr7xMWVhGZcsU");
+    }
+
+    @Override
+    public void onUpdateReceived(Update update) {
+        var chatId = update.getMessage().getChatId();
+        var text = update.getMessage().getText();
+
+        try {
+            if (text.equals("/start")) {
+                sendMessage(chatId,"Hello!");
+            } else if (text.equals("btc")) {
+                sendPrice(chatId,"BTC");
+            } else if (text.equals("eth")) {
+                sendPrice(chatId,"ETH");
+            }
+            else if (text.equals("ltc")) {
+                sendPrice(chatId,"LTC");
+            }
+            else if (text.equals("/all")) {
+                sendPrice(chatId,"BTC");
+                sendPrice(chatId,"LTC");
+                sendPrice(chatId,"ETH");
+            }
+               else {
+                sendMessage(chatId,"Unknown command!");
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error!");
+        }
+    }
+    void sendPrice(long chatId, String name)throws Exception {
+        var price = CryptoPrice.spotPrice(name);
+        sendMessage(chatId,name+ "price:" + price.getAmount().doubleValue());
+    }
+    void sendMessage(long chatId, String text) throws Exception {
+        var message = new SendMessage();
+        message.setChatId(chatId);
+        message.setText(text);
+        execute(message);
+
+    }
+    @Override
+    public String getBotUsername() {
+        return "TaskBot11111111_bot";
+    }
+}
