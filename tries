@@ -1,0 +1,7 @@
+else  if (text.equals("btc,ltc,eth")) {
+                var price = CryptoPrice.spotPrice("BTC");
+                var price = CryptoPrice.spotPrice("LTC");
+                var price = CryptoPrice.spotPrice("ETH");
+                message.setText("BTC price: ", "LTC price", "ETH price" + price.getAmount().doubleValue());
+
+            }
