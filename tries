@@ -1,7 +1,11 @@
-else  if (text.equals("btc,ltc,eth")) {
+1)    else  if (text.equals("btc,ltc,eth")) {
                 var price = CryptoPrice.spotPrice("BTC");
                 var price = CryptoPrice.spotPrice("LTC");
                 var price = CryptoPrice.spotPrice("ETH");
                 message.setText("BTC price: ", "LTC price", "ETH price" + price.getAmount().doubleValue());
 
             }
+
+
+2)    else if (text.equals("btc,ltc,eth")) {
+                sendPrice(chatId, "BTC, LTC, ETH");
